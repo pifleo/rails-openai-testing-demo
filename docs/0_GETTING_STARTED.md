@@ -67,3 +67,13 @@ rails db:migrate
 ```bash
 bin/dev
 ```
+
+## Setup PGVector
+
+We will use the gem [neighbor](https://github.com/ankane/neighbor) to work with PGVector. If you run PostgreSQL with Docker as described above, there is no need to install and build PGVector extension. So you can move on to this:
+
+```bash
+bundle add neighbor
+rails generate neighbor:vector
+rails db:migrate
+```

@@ -106,3 +106,62 @@ openai:
   access_token: xxxxx
   organization_id: org-xxxxx
 ```
+
+## Build a simple chat with [Hotwired](https://hotwired.dev/)
+
+Create Questions controller `app/controllers/questions_controller.rb`:
+```bash
+rails g controller Questions index create
+```
+
+```ruby
+# app/controllers/questions_controller.rb
+class QuestionsController < ApplicationController
+  def index; end
+
+  def create
+    @answer = "I don't know."
+  end
+
+  private
+
+  def question
+    params[:question][:question]
+  end
+end
+```
+
+Add/Edit routes to `config/routes.rb`:
+```ruby
+resources :questions, only: [:index, :create]
+```
+
+Create/Edit chat layout in `app/views/questions/index.html.erb`:
+```html
+<div class="w-full">
+  <div class="h-48 w-full rounded mb-5 p-3 bg-gray-100">
+    <%= turbo_frame_tag "answer" %>
+  </div>
+
+  <%= turbo_frame_tag "new_question", target: "_top" do %>
+    <%= form_tag questions_path, class: 'w-full' do |f| %>
+      <input type="text"
+             class="w-full rounded"
+             name="question[question]"
+             placeholder="Type your question">
+    <% end %>
+  <% end %>
+</div>
+```
+
+Display the answer with turbo stream.
+Create file `app/views/questions/create.turbo_stream.erb` and fill it with:
+```ruby
+<%= turbo_stream.update('answer', @answer) %>
+```
+
+Done 🎉
+Open http://localhost:3000/questions and check it out.
+
+![Question index preview](images/0_totM2nWnG61bfji0.png)
+

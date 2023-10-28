@@ -1,0 +1,13 @@
+<div class="w-full">
+  <div class="h-48 w-full rounded mb-5 p-3 bg-gray-100">
+    <%= turbo_frame_tag "answer" %>
+  </div>
+  <%= turbo_frame_tag "new_question", target: "_top" do %>
+    <%= form_tag questions_path, class: 'w-full' do |f| %>
+      <input type="text"
+             class="w-full rounded"
+             name="question[question]"
+             placeholder="Type your question">
+    <% end %>
+  <% end %>
+</div>

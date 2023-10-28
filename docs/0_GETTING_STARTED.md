@@ -103,8 +103,8 @@ EDITOR=nano rails credentials:edit
 
 ```yaml
 openai:
-  access_token: xxxxx
-  organization_id: org-xxxxx
+  access_token: sk-xxxxx
+  organization_id: org-xxxxx # Leave blank if you are on the "Personal" plan
 ```
 
 ## Build a simple chat with [Hotwired](https://hotwired.dev/)

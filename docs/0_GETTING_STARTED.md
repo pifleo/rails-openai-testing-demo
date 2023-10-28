@@ -77,3 +77,32 @@ bundle add neighbor
 rails generate neighbor:vector
 rails db:migrate
 ```
+
+## Setup OpenAI
+
+To make OpenAI API calls, we will use [ruby-openai](https://github.com/alexrudall/ruby-openai) gem.
+
+```bash
+bundle add ruby-openai
+```
+
+Create `config/initializers/openai.rb` file with the following content:
+
+```ruby
+OpenAI.configure do |config|
+  config.access_token =  Rails.application.credentials.openai.access_token
+  config.organization_id = Rails.application.credentials.openai.organization_id
+end
+```
+
+Add your OpenAI API key to the credentials. You can find them in your [OpenAI account](https://platform.openai.com/account/api-keys).
+
+```bash
+EDITOR=nano rails credentials:edit
+```
+
+```yaml
+openai:
+  access_token: xxxxx
+  organization_id: org-xxxxx
+```

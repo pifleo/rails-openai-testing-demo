@@ -71,3 +71,5 @@ group :test do
 end
 
 gem "neighbor", "~> 0.3.1"
+
+gem "ruby-openai", "~> 5.1"

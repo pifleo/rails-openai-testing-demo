@@ -1,0 +1,26 @@
+# .rubocop.yml
+# This file need to be copied at the root of your project folder
+# https://github.com/rubocop/rubocop
+# https://github.com/rubocop/rubocop-rails
+# https://github.com/rubocop/rubocop-rspec
+# https://github.com/rubocop/rubocop-performance/
+require:
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-performance
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - "vendor/**/*"
+    - "spec/fixtures/**/*"
+    - "tmp/**/*"
+    - ".git/**/*"
+    - "bin/*"
+  TargetRubyVersion: 3.2
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false

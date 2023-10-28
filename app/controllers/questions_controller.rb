@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
   def index; end
 
   def create
-    @answer = ChatApiService.call(question)
+    @answer = AnswerQuestionService.new(question).call
   end
 
   private

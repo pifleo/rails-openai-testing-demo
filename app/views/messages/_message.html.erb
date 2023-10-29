@@ -1,0 +1,11 @@
+<div class="my-1">
+  <% if message.role == "user" %>
+    <div class="bg-blue-500 rounded-lg">
+    <% elsif message.role == "assistant" %>
+      <div class="bg-emerald-500 rounded-lg">
+      <% elsif message.role == "system" %>
+        <div class="bg-neutral-700 rounded-lg">
+        <% end %>
+        <p class="p-2 text-white"><%= message.content %></p>
+      </div>
+    </div>

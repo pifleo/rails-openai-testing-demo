@@ -1,0 +1,14 @@
+<div>
+  <h1 class="font-bold text-4xl"><a href="<%= conversations_path %>" class="text-blue-600 hover:text-blue-300" >Conversations</a> # <%= @conversation.id %></h1>
+  <div>
+    <div id="chat-messages" class="w-6/12">
+      <%= turbo_stream_from "messages" %>
+      <%= turbo_frame_tag "messages" do %>
+        <%= render @conversation.messages %>
+      <% end %>
+    </div>
+    <%= turbo_frame_tag dom_id(@conversation, :new_message) do %>
+      <%= render "messages/form", model: [@conversation, Message.new] %>
+    <% end %>
+  </div>
+</div>

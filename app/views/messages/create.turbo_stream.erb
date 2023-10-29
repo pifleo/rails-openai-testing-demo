@@ -1,0 +1,3 @@
+<%#- We don't have the reply from the API yet so we don't append a message but we can clear the form %>
+<%= turbo_stream.replace dom_id(@conversation, :new_message),
+    partial: "messages/form", locals: { model: [@conversation, Message.new] } %>

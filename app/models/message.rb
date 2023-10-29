@@ -4,6 +4,7 @@ class Message < ApplicationRecord
   belongs_to :conversation
   enum :role, %i[system user assistant], default: :user
 
+  before_save { self.content.strip unless self.content.nil? }
   after_create_commit lambda {
                         broadcast_append_to 'messages', partial: 'messages/message', locals: { message: self },
                                                         target: 'messages'
@@ -15,8 +16,10 @@ class Message < ApplicationRecord
   def generate_ai_response
     return if role != 'user'
 
-    response = chat(messages: conversation.messages.map { |m| { role: m.role, content: m.content } })
-    conversation.messages << Message.create(role: 'assistant', content: response)
+    messages = conversation.messages.map { |m| { role: m.role, content: m.content } }
+    response, usage = chat(messages:)
+
+    conversation.messages << Message.create(role: 'assistant', content: response, usage:)
   end
 
   def chat(model: 'gpt-3.5-turbo', messages: [])
@@ -30,6 +33,6 @@ class Message < ApplicationRecord
       }
     )
 
-    response.dig('choices', 0, 'message', 'content')
+    [response.dig('choices', 0, 'message', 'content'), response.dig('usage')]
   end
 end

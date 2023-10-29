@@ -357,3 +357,22 @@ After having realized a couple of applications in this way I would like to highl
 2. **System messages**: These messages allow you to upload information and provide clear instructions to ChatGPT during the conversation. This is especially useful for guiding the flow of the conversation and ensuring that the chatbot understands the context and intentions of the user.
 
 When you sign up you get $5 credit, which gives you for several conversations. So you can start your trial and error journey.
+
+# One more things
+
+Edit the Message model to store usage of api
+
+```bash
+rails g migration AddUsageToMessage usage:jsonb
+```
+
+Then edit the migration:
+```ruby
+class AddUsageToMessage < ActiveRecord::Migration[7.1]
+  def change
+    add_column :messages, :usage, :jsonb, default: {}
+  end
+end
+```
+
+And run `rails db:migrate`

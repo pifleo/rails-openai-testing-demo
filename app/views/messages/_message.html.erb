@@ -9,3 +9,8 @@
         <p class="p-2 text-white"><%= message.content %></p>
       </div>
     </div>
+    <% unless message.usage.blank? %>
+      <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">Prompt: <%= message.usage["prompt_tokens"] %></span>
+      <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Completion: <%= message.usage["completion_tokens"] %></span>
+      <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">Total: <%= message.usage["total_tokens"] %></span>
+    <% end %>

@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+
+ #messages p {
+    white-space: pre-wrap;
+ }

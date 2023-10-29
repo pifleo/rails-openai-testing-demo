@@ -7,9 +7,8 @@
         <%= render @conversation.messages %>
       <% end %>
     </div>
-    <%= form_with(model: [@conversation, Message.new], remote: true) do |form| %>
-      <%= form.text_field :content, class: "w-96 rounded-lg" %>
-      <%= form.submit "Send", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+    <%= turbo_frame_tag dom_id(@conversation, :new_message) do %>
+      <%= render "messages/form", model: [@conversation, Message.new] %>
     <% end %>
   </div>
 </div>

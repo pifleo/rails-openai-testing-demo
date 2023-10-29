@@ -1,0 +1,19 @@
+<%= form_with model: conversation, class: "grid grid-cols-2 gap-4" do |form| %>
+  <% if conversation.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(conversation.errors.count, "error") %> prohibited this conversation from being saved:</h2>
+      <ul>
+        <% conversation.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= form.label :temperature, "Model temperature:" %>
+  <%= form.number_field :temperature, in: (0.0)..(1.0), step: 0.1, value: 0.5, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  <%= form.label :init_system_message, "Initial message (Prompt):" %>
+  <%= form.text_area :init_system_message, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  <div class="inline">
+    <%= form.submit class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer inline-block" %>
+  </div>
+<% end %>

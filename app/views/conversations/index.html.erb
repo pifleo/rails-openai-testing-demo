@@ -1,14 +1,19 @@
-<div>
-  <div class="flex">
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
+  <div class="flex items-center">
     <h1 class="font-bold text-4xl pr-2">Conversations</h1>
-    <a href="<%= new_conversation_path %>" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">New</a>
+    <a href="<%= new_conversation_path %>" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">New conversation</a>
   </div>
-  <ul class="list-disc p-4">
-    <% @conversations.each do |c| %>
-      <li class="pb-2"><a href="<%= conversation_url(c) %>"><%= c.id %> - <%= c.init_system_message[0..40]%>...</a></li>
-    <% end %>
-    <% if @conversations.empty? %>
-      <span class="text-xl my-4">No conversations yet</span>
-    <% end %>
-  </ul>
+  <div id="conversations" class="min-w-full">
+    <ul class="list-disc p-4">
+      <% @conversations.each do |c| %>
+        <li class="pb-2"><a href="<%= conversation_url(c) %>"><%= c.id %> - <%= c.init_system_message[0..40]%>...</a></li>
+      <% end %>
+      <% if @conversations.empty? %>
+        <span class="text-xl my-4">No conversations yet</span>
+      <% end %>
+    </ul>
+  </div>
 </div>

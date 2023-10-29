@@ -1,5 +1,12 @@
 <div>
-  <h1 class="font-bold text-4xl"><a href="<%= conversations_path %>" class="text-blue-600 hover:text-blue-300" >Conversations</a> # <%= @conversation.id %></h1>
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
+  <div class="flex">
+    <h1 class="font-bold text-4xl"><a href="<%= conversations_path %>" class="text-blue-600 hover:text-blue-300" >Conversations</a> # <%= @conversation.id %></h1>
+    <%= link_to "Edit", edit_conversation_path(@conversation), class: "mt-2 rounded-lg py-2 px-4 bg-gray-100 inline-block font-medium" %>
+    <%= button_to "Destroy", conversation_path(@conversation), method: :delete, class: "mt-2 rounded-lg py-2 px-4 bg-gray-100 font-medium" %>
+  </div>
   <div>
     <div id="chat-messages" class="w-6/12">
       <%= turbo_stream_from "messages" %>

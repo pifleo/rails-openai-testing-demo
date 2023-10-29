@@ -2,7 +2,7 @@
 
 class Conversation < ApplicationRecord
   belongs_to :token
-  has_many :messages
+  has_many :messages, dependent: :destroy
 
   after_create :create_system_message
 

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :tokens, only: [:create]
-  resources :conversations, only: [:new, :create, :index, :show] do
+  resources :conversations do
     resources :messages, only: [:create]
   end
 

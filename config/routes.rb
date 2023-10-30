@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :kb do
+    resources :documents
+  end
   resources :object_stores do
     member do
       delete :remove_document

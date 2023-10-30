@@ -1,0 +1,57 @@
+<!-- https://tailwindcomponents.com/component/responsive-table-5 -->
+<section class="container mx-auto p-6 font-mono">
+  <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+    <% if notice.present? %>
+      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+    <% end %>
+    <div class="flex justify-between items-center m-5">
+      <h1 class="font-bold text-4xl">Documents</h1>
+      <%= link_to "New document", new_kb_document_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    </div>
+    <div id="kb_documents" class="w-full overflow-x-auto">
+      <table class="w-full">
+        <thead>
+          <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+            <th class="px-4 py-3">Name</th>
+            <th class="px-4 py-3">Content</th>
+            <th class="px-4 py-3">Status</th>
+            <th class="px-4 py-3">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white">
+          <% @kb_documents.each do |document| %>
+            <tr class="text-gray-700 hover:bg-neutral-100">
+              <td class="px-4 py-3 border">
+                <div class="flex items-center text-sm">
+                  <div class="relative w-8 h-8 mr-3 rounded-full md:block">
+                    <% if document.file.representable? %>
+                      <%= image_tag document.file.representation(resize_to_limit: [200, 200]), class: "object-cover w-full h-full rounded-full" %>
+                    <% else %>
+                      <%= link_to rails_blob_path(document.file, disposition: "attachment") do %>
+                        <%= image_tag "placeholder.png", alt: "Download file" %>
+                      <% end %>
+                    <% end %>
+                    <%# <img class="object-cover w-full h-full rounded-full" src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="" loading="lazy" /> %>
+                    <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                  </div>
+                  <div>
+                    <p class="font-semibold text-black">
+                        <%= link_to document.name ||= "[FILE]", document %></p>
+                    <p class="text-xs text-gray-600">Collection</p>
+                  </div>
+                </div>
+              </td>
+              <td class="px-4 py-3 text-ms font-semibold border"><%= document.content %></td>
+              <td class="px-4 py-3 text-xs border">
+                <span class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-sm"> Pending </span>
+                <%# <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"> Acceptable </span> %>
+              </td>
+              <td class="px-4 py-3 text-sm border"><%= link_to "...", document %></p>
+</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

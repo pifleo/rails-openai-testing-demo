@@ -1,0 +1,23 @@
+<%- file ||= document.file %>
+<div id="<%= dom_id document %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Document <%= document.name %></strong>
+  </p>
+  <% if file.representable? %>
+    <%= image_tag file.representation(resize_to_limit: [420, 420]) %>
+  <% else %>
+    <%= link_to rails_blob_path(file, disposition: "attachment") do %>
+      <%= image_tag "placeholder.png", alt: "Download file" %>
+    <% end %>
+  <% end %>
+  <%= link_to document.file.filename, rails_blob_path(document.file, disposition: "attachment") %>
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Content:</strong>
+    <%= document.content %>
+  </p>
+  <% if action_name != "show" %>
+    <%= link_to "Show this document", document, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to "Edit this document", edit_kb_document_path(document), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

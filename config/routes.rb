@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :object_stores do
+    member do
+      delete :remove_document
+    end
+  end
   resources :items
   resources :questions, only: %i[index create]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

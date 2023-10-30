@@ -1,0 +1,22 @@
+<div id="<%= dom_id object_store %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= object_store.name %>
+  </p>
+  <% if object_store .documents.attached? %>
+    <% object_store.documents.each do |document| %>
+      <%= document.filename %>
+      <%= link_to "Remove", remove_document_object_store_path(document), method: :delete, data: { confirm: 'Are you sure?', turbo_method: :delete } %>
+      <br />
+    <% end %>
+  <% end %>
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Content:</strong>
+    <%= object_store.content %>
+  </p>
+  <% if action_name != "show" %>
+    <%= link_to "Show this object store", object_store, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to "Edit this object store", edit_object_store_path(object_store), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

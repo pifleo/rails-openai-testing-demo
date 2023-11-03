@@ -1,0 +1,26 @@
+<%- document_file ||= document.document_file %>
+<div id="<%= dom_id document %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Document <%= document.name %></strong>
+  </p>
+  <p class="my-5">
+    <%= render partial: 'kb/documents/document_preview', locals: { document:, variant: :preview } %>
+  </p>
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Num pages:</strong>
+    <%= document.num_pages %>
+  </p>
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Document file:</strong>
+    <%= link_to document.document_file.filename, document.document_file if document.document_file.attached? %>
+  </p>
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Summary:</strong>
+    <%= document.summary %>
+  </p>
+  <% if action_name != "show" %>
+    <%= link_to "Show this document", document, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to "Edit this document", edit_kb_document_path(document), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

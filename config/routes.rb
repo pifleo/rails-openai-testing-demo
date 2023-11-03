@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :kb do
+    resources :documents
+  end
   resources :items
   resources :questions, only: %i[index create]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

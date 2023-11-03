@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_30_192301) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_03_202941) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "vector"
@@ -43,16 +43,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_30_192301) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "conversations", force: :cascade do |t|
-    t.float "temperature"
-    t.text "init_system_message"
-    t.string "model"
-    t.bigint "token_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["token_id"], name: "index_conversations_on_token_id"
-  end
-
   create_table "items", force: :cascade do |t|
     t.string "page_name"
     t.text "text"
@@ -63,36 +53,13 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_30_192301) do
 
   create_table "kb_documents", force: :cascade do |t|
     t.string "name"
-    t.text "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "messages", force: :cascade do |t|
-    t.text "content"
-    t.integer "role"
-    t.bigint "conversation_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.jsonb "usage", default: {}
-    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
-  end
-
-  create_table "object_stores", force: :cascade do |t|
-    t.string "name"
-    t.text "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "tokens", force: :cascade do |t|
-    t.string "token"
+    t.integer "num_pages"
+    t.text "summary"
+    t.vector "summary_embedding", limit: 1536
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "conversations", "tokens"
-  add_foreign_key "messages", "conversations"
 end

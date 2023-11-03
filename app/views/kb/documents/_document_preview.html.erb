@@ -1,0 +1,11 @@
+<% variant ||= :cover_image %>
+<% image_class ||= '' %>
+<% document_file ||= document.document_file %>
+<% if document_file.representable? %>
+  <%= image_tag document_file.representation(variant), class: image_class %>
+<% else %>
+  <%= link_to rails_blob_path(document_file, disposition: "attachment") do %>
+    <%#= image_tag "placeholder.png", alt: "Download file" %>
+  <% end %>
+<% end %>
+<%= link_to document.document_file.filename, rails_blob_path(document.document_file, disposition: "attachment") unless action_name.to_sym == :index %>

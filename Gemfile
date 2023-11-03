@@ -73,3 +73,5 @@ end
 gem "neighbor", "~> 0.3.1"
 
 gem "ruby-openai", "~> 5.1"
+
+gem "image_processing", ">= 1.2" # https://guides.rubyonrails.org/active_storage_overview.html#requirements

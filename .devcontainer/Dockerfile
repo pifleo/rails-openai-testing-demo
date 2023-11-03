@@ -26,6 +26,10 @@ ENV RAILS_DEVELOPMENT_HOSTS=".githubpreview.dev,.preview.app.github.dev,.app.git
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
 
+# Add Rails Active Storage requirements
+# https://guides.rubyonrails.org/active_storage_overview.html#requirements
+RUN apt update && apt -y install libvips imagemagick ghostscript ffmpeg mupdf mupdf-tools # fonts-noto fonts-freefont-otf
+
 # [Optional] Uncomment this line to install additional gems.
 # RUN su vscode -c "gem install <your-gem-names-here>"
 RUN su vscode -c "gem install solargraph rubocop rubocop-rails rubocop-rspec rubocop-performance htmlbeautifier --no-document"

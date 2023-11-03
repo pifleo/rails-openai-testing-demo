@@ -1,0 +1,2 @@
+module Kb::DocumentsHelper
+end

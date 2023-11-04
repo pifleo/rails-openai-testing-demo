@@ -75,3 +75,9 @@ gem "neighbor", "~> 0.3.1"
 gem "ruby-openai", "~> 5.1"
 
 gem "image_processing", ">= 1.2" # https://guides.rubyonrails.org/active_storage_overview.html#requirements
+
+gem "pdf-reader", "~> 2.11"
+
+gem "docx", "~> 0.8.0"
+
+gem "poppler", "~> 4.2"

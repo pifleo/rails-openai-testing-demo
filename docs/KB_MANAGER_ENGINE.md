@@ -36,3 +36,10 @@ module Kb
   end
 end
 ```
+
+```bash
+bundle add poppler
+bundle add pdf-reader
+bundle add docx
+bin/rails generate job TextExtraction
+```

@@ -25,6 +25,7 @@ class Kb::DocumentsController < ApplicationController
 
     respond_to do |format|
       if @kb_document.save
+        TextExtractionJob.perform_later(@kb_document.id)
         format.html { redirect_to kb_document_url(@kb_document), notice: "Document was successfully created." }
         format.json { render :show, status: :created, location: @kb_document }
       else
@@ -38,6 +39,7 @@ class Kb::DocumentsController < ApplicationController
   def update
     respond_to do |format|
       if @kb_document.update(kb_document_params)
+        TextExtractionJob.perform_later(@kb_document.id)
         format.html { redirect_to kb_document_url(@kb_document), notice: "Document was successfully updated." }
         format.json { render :show, status: :ok, location: @kb_document }
       else

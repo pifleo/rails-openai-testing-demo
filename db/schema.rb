@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_03_202941) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_04_003821) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "vector"
 
@@ -52,14 +53,27 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_03_202941) do
   end
 
   create_table "kb_documents", force: :cascade do |t|
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.string "name"
-    t.integer "num_pages"
     t.text "summary"
     t.vector "summary_embedding", limit: 1536
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "pages_count"
+  end
+
+  create_table "kb_pages", force: :cascade do |t|
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
+    t.bigint "kb_document_id", null: false
+    t.integer "page_index", default: 1, null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["kb_document_id", "page_index"], name: "index_kb_pages_on_kb_document_id_and_page_index", unique: true
+    t.index ["kb_document_id"], name: "index_kb_pages_on_kb_document_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "kb_pages", "kb_documents"
 end

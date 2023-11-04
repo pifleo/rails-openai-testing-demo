@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   namespace :kb do
+    resources :pages
     resources :documents
   end
   resources :items

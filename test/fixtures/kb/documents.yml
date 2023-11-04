@@ -2,12 +2,10 @@
 
 one:
   name: MyString
-  num_pages: 1
   summary: MyText
-  summary_embedding: 
+  summary_embedding:
 
 two:
   name: MyString
-  num_pages: 1
   summary: MyText
-  summary_embedding: 
+  summary_embedding:

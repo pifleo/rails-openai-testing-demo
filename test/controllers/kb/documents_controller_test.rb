@@ -17,7 +17,7 @@ class Kb::DocumentsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create kb_document" do
     assert_difference("Kb::Document.count") do
-      post kb_documents_url, params: { kb_document: { name: @kb_document.name, num_pages: @kb_document.num_pages, summary: @kb_document.summary, summary_embedding: @kb_document.summary_embedding } }
+      post kb_documents_url, params: { kb_document: { name: @kb_document.name, summary: @kb_document.summary, summary_embedding: @kb_document.summary_embedding } }
     end
 
     assert_redirected_to kb_document_url(Kb::Document.last)
@@ -34,7 +34,7 @@ class Kb::DocumentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update kb_document" do
-    patch kb_document_url(@kb_document), params: { kb_document: { name: @kb_document.name, num_pages: @kb_document.num_pages, summary: @kb_document.summary, summary_embedding: @kb_document.summary_embedding } }
+    patch kb_document_url(@kb_document), params: { kb_document: { name: @kb_document.name, summary: @kb_document.summary, summary_embedding: @kb_document.summary_embedding } }
     assert_redirected_to kb_document_url(@kb_document)
   end
 

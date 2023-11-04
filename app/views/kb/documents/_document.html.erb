@@ -2,21 +2,31 @@
 <div id="<%= dom_id document %>">
   <p class="my-5">
     <strong class="block font-medium mb-1">Document <%= document.name %></strong>
+    <%= document.uuid %>
   </p>
   <p class="my-5">
     <%= render partial: 'kb/documents/document_preview', locals: { document:, variant: :preview } %>
   </p>
   <p class="my-5">
-    <strong class="block font-medium mb-1">Num pages:</strong>
-    <%= document.num_pages %>
+    <strong class="block font-medium mb-1">Pages count:</strong>
+    <%= document.pages_count %>
   </p>
+  <ul>
+    <% @kb_document.pages.each do |page| %>
+      <li>
+        Page: <%= link_to page.page_index, kb_page_path(page) %>
+        <pre><%= page.content %></pre>
+        <hr />
+      </li>
+    <% end %>
+  </ul>
   <p class="my-5">
     <strong class="block font-medium mb-1">Document file:</strong>
     <%= link_to document.document_file.filename, document.document_file if document.document_file.attached? %>
   </p>
   <p class="my-5">
     <strong class="block font-medium mb-1">Summary:</strong>
-    <pre><%= document.summary %></pre>
+    <pre><%= document.summary&.truncate(280) %></pre>
   </p>
   <% if action_name != "show" %>
     <%= link_to "Show this document", document, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>

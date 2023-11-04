@@ -15,7 +15,6 @@ class Kb::DocumentsTest < ApplicationSystemTestCase
     click_on "New document"
 
     fill_in "Name", with: @kb_document.name
-    fill_in "Num pages", with: @kb_document.num_pages
     fill_in "Summary", with: @kb_document.summary
     fill_in "Summary embedding", with: @kb_document.summary_embedding
     click_on "Create Document"
@@ -29,7 +28,6 @@ class Kb::DocumentsTest < ApplicationSystemTestCase
     click_on "Edit this document", match: :first
 
     fill_in "Name", with: @kb_document.name
-    fill_in "Num pages", with: @kb_document.num_pages
     fill_in "Summary", with: @kb_document.summary
     fill_in "Summary embedding", with: @kb_document.summary_embedding
     click_on "Update Document"

@@ -67,6 +67,6 @@ class Kb::DocumentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def kb_document_params
-      params.require(:kb_document).permit(:name, :num_pages, :document_file, :cover_image, :summary, :summary_embedding)
+      params.require(:kb_document).permit(:name, :document_file, :cover_image, :summary, :summary_embedding)
     end
 end

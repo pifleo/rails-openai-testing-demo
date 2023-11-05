@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   namespace :kb do
-    resources :pages
-    resources :documents
+    resources :documents do
+      resources :pages
+    end
   end
   resources :items
   resources :questions, only: %i[index create]

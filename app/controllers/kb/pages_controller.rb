@@ -1,9 +1,10 @@
 class Kb::PagesController < ApplicationController
+  before_action :set_kb_document
   before_action :set_kb_page, only: %i[ show edit update destroy ]
 
   # GET /kb/pages or /kb/pages.json
   def index
-    @kb_pages = Kb::Page.all
+    @kb_pages = @kb_document.pages
   end
 
   # GET /kb/pages/1 or /kb/pages/1.json
@@ -12,7 +13,7 @@ class Kb::PagesController < ApplicationController
 
   # GET /kb/pages/new
   def new
-    @kb_page = Kb::Page.new
+    @kb_page = @kb_document.pages.new
   end
 
   # GET /kb/pages/1/edit
@@ -21,11 +22,11 @@ class Kb::PagesController < ApplicationController
 
   # POST /kb/pages or /kb/pages.json
   def create
-    @kb_page = Kb::Page.new(kb_page_params)
+    @kb_page = @kb_document.pages.new(kb_page_params)
 
     respond_to do |format|
       if @kb_page.save
-        format.html { redirect_to kb_page_url(@kb_page), notice: "Page was successfully created." }
+        format.html { redirect_to kb_document_page_url(@kb_document, @kb_page), notice: "Page was successfully created." }
         format.json { render :show, status: :created, location: @kb_page }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +39,7 @@ class Kb::PagesController < ApplicationController
   def update
     respond_to do |format|
       if @kb_page.update(kb_page_params)
-        format.html { redirect_to kb_page_url(@kb_page), notice: "Page was successfully updated." }
+        format.html { redirect_to kb_document_page_url(@kb_document, @kb_page), notice: "Page was successfully updated." }
         format.json { render :show, status: :ok, location: @kb_page }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,13 +53,17 @@ class Kb::PagesController < ApplicationController
     @kb_page.destroy!
 
     respond_to do |format|
-      format.html { redirect_to kb_pages_url, notice: "Page was successfully destroyed." }
+      format.html { redirect_to kb_document_pages_url(@kb_document), notice: "Page was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    def set_kb_document
+      @kb_document = Kb::Document.find(params[:document_id])
+    end
+
+  # Use callbacks to share common setup or constraints between actions.
     def set_kb_page
       @kb_page = Kb::Page.find(params[:id])
     end

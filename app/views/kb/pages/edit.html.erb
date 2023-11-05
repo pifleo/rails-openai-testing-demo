@@ -3,6 +3,6 @@
 
   <%= render "form", kb_page: @kb_page %>
 
-  <%= link_to "Show this page", @kb_page, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-  <%= link_to "Back to pages", kb_pages_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+  <%= link_to "Show this page", kb_document_page_path(@kb_document, @kb_page), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+  <%= link_to "Back to pages", kb_document_pages_path(@kb_document), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
 </div>

@@ -6,10 +6,10 @@
 
     <%= render @kb_page %>
 
-    <%= link_to "Edit this kb_page", edit_kb_page_path(@kb_page), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to "Edit this kb_page", edit_kb_document_page_path(@kb_document, @kb_page), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <div class="inline-block ml-2">
-      <%= button_to "Destroy this kb_page", kb_page_path(@kb_page), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+      <%= button_to "Destroy this kb_page", kb_document_page_path(@kb_document, @kb_page), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
     </div>
-    <%= link_to "Back to kb_pages", kb_pages_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to "Back to kb_pages", kb_document_pages_path(@kb_document), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
   </div>
 </div>

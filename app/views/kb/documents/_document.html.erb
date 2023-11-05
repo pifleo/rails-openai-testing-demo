@@ -9,14 +9,13 @@
   </p>
   <p class="my-5">
     <strong class="block font-medium mb-1">Pages count:</strong>
-    <%= document.pages_count %>
+    <%= document.pages_count %> |
+    <%= link_to 'See document pages', kb_document_pages_path(document) %>
   </p>
-  <ul>
+  <ul class="list-disc">
     <% @kb_document.pages.each do |page| %>
       <li>
-        Page: <%= link_to page.page_index, kb_page_path(page) %>
-        <pre><%= page.content %></pre>
-        <hr />
+        <%= link_to "Page: #{page.page_index}", kb_document_page_path(@kb_document, page) %>
       </li>
     <% end %>
   </ul>

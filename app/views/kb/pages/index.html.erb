@@ -4,8 +4,9 @@
   <% end %>
 
   <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Pages</h1>
-    <%= link_to "New page", new_kb_page_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    <h1 class="font-bold text-4xl">
+        <%= link_to "Document #{@kb_document.id}", kb_document_path(@kb_document) %> | Pages</h1>
+    <%#= link_to "New page", new_kb_document_page_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
   <div id="kb_pages" class="min-w-full">
